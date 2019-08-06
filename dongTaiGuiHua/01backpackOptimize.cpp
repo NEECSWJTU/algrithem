@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <limits.h>
 
 using namespace std;
 
@@ -7,6 +8,7 @@ void zeroOneBackpack(vector<int> &dp,
                      int kindCount,int capacity,
                      vector<int> cost,vector<int> value)
 {
+    dp[0] = 0;
     for(int i = 1; i <= kindCount;i++){
         for(int j = capacity;j > 0;j--){
             if(cost[i] > j){
@@ -17,6 +19,11 @@ void zeroOneBackpack(vector<int> &dp,
             }
         }
     }
+
+    for(int i = 0;i <= capacity;i++){
+        cout << dp[i] << " ";
+    }
+    cout << endl;
 }
 int main(){
     int kindCount = 0;
@@ -36,7 +43,7 @@ int main(){
         cost.push_back(cost_tmp);
         value.push_back(value_tmp);
     }
-    vector<int> dp(capacity + 1,0);
+    vector<int> dp(capacity + 1,INT_MIN);
     zeroOneBackpack(dp,kindCount,capacity,
                      cost,value);
     cout << dp[capacity] << endl;
